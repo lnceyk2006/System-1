@@ -26,6 +26,7 @@ class InventoryDashboard(ctk.CTk):
 
         # Create sidebar
         self.create_sidebar()
+        
 
         # Create main content area
         self.create_main_content()
@@ -95,6 +96,7 @@ class InventoryDashboard(ctk.CTk):
             ("📦 Inventory", lambda: self.show_section("inventory")),
             ("📈 Reports", lambda: self.show_section("reports")),
             ("🏢 Suppliers", lambda: self.show_section("suppliers")),
+            ("🚪 Logout", self.logout)
         ]
 
         for text, command in nav_items:
@@ -121,6 +123,7 @@ class InventoryDashboard(ctk.CTk):
             text_color="#808080"
         )
         version_label.pack()
+
 
     def create_main_content(self):
         """Create main content area"""
@@ -312,6 +315,12 @@ class InventoryDashboard(ctk.CTk):
             self.show_reports()
         elif section == "suppliers":
             self.show_suppliers()
+
+    def logout(self):
+        """Logout and close dashboard"""
+        if messagebox.askyesno("Logout", "Are you sure you want to logout?"):
+            self.destroy()
+            os.system("python login.py")
 
     def show_dashboard(self):
         """Display dashboard view"""
